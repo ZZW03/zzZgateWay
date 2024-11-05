@@ -1,6 +1,6 @@
 package com.zzz.gateway.config;
 
-import com.zzz.utils.PropertiesUtils;
+import com.zzz.common.utils.PropertiesUtils;
 import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.io.InputStream;

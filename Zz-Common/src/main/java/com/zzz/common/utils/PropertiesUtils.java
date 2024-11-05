@@ -1,4 +1,4 @@
-package com.zzz.utils;
+package com.zzz.common.utils;
 
 import java.lang.reflect.Method;
 import java.util.Properties;
