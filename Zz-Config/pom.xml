@@ -13,8 +13,8 @@
 
     <artifactId>Zz-Config</artifactId>
     <modules>
-        <module>Zz-ConfigApi</module>
-        <module>Zz-ConfigNacos</module>
+        <module>Zz-Config-Api</module>
+        <module>Zz-Config-Nacos</module>
     </modules>
 
 

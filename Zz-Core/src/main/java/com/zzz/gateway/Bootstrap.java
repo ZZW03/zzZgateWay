@@ -1,6 +1,6 @@
 package com.zzz.gateway;
 
-import com.zzz.api.ConfigCenter;
+import com.zzz.config.ConfigCenter;
 import com.zzz.gateway.config.Config;
 import com.zzz.gateway.config.ConfigLoader;
 import com.zzz.gateway.config.DynamicConfigManager;
@@ -24,11 +24,23 @@ public class Bootstrap {
             return new RuntimeException("not found ConfigCenter impl");
         });
 
-        // 从配置中心获取配置
+        // 从配置中心获取配置 先加载规则
         configCenter.init(config.getRegistryAddress(), config.getEnv());
         configCenter.subscribeRulesChange(rules -> DynamicConfigManager.getInstance()
                 .putAllRule(rules));
 
 
+        //todo 注册网关项目并且进行订阅 注册中心...
+
+
+        //  启动netty 加载过滤器链->服务接受请求 -> 走过滤器 -> 重新路由
+
+
+
     }
+
+
+
+
+
 }

@@ -17,20 +17,21 @@ import java.util.stream.Collectors;
  */
 public class DynamicConfigManager {
 
-	//	服务的定义集合：uniqueId代表服务的唯一标识
+	//	服务的定义集合：uniqueId代表服务的唯一标识 服务的基础信息 存在mate中的信息
 	private ConcurrentHashMap<String /* uniqueId */ , ServiceDefinition>  serviceDefinitionMap = new ConcurrentHashMap<>();
 
-	//	服务的实例集合：uniqueId与一对服务实例对应
+	//	服务的实例集合：uniqueId与一对服务实例对应,具体的实例信息
 	private ConcurrentHashMap<String /* uniqueId */ , Set<ServiceInstance>>  serviceInstanceMap = new ConcurrentHashMap<>();
 
-	//	规则集合
+	//规则集合
 	private ConcurrentHashMap<String /* ruleId */ , Rule>  ruleMap = new ConcurrentHashMap<>();
 
 	//路径以及规则集合
 	private ConcurrentHashMap<String /* 路径 */ , Rule>  pathRuleMap = new ConcurrentHashMap<>();
 
 	private ConcurrentHashMap<String /* 服务名 */ , List<Rule>>  serviceRuleMap = new ConcurrentHashMap<>();
-		private DynamicConfigManager() {
+
+	private DynamicConfigManager() {
 	}
 
 	private static class SingletonHolder {
@@ -124,6 +125,7 @@ public class DynamicConfigManager {
 		ruleMap.put(ruleId, rule);
 	}
 
+	// 本都缓存这些规则
 	public void putAllRule(List<Rule> ruleList) {
 		ConcurrentHashMap<String,Rule> newRuleMap = new ConcurrentHashMap<>();
 		ConcurrentHashMap<String,Rule> newPathMap = new ConcurrentHashMap<>();

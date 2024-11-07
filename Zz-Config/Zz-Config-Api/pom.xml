@@ -5,21 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zzz</groupId>
-        <artifactId>ZzGateway</artifactId>
+        <artifactId>Zz-Config</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>Zz-Register</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>Zz-Register-Api</module>
-        <module>Zz-Register-Nacos</module>
-    </modules>
+    <artifactId>Zz-Config-Api</artifactId>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 
 </project>

@@ -14,6 +14,7 @@ import java.util.Objects;
 @Builder
 public class ServiceDefinition implements Serializable {
 
+
 	private static final long serialVersionUID = -8263365765897285189L;
 
 	/**
