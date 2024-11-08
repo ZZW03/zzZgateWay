@@ -28,9 +28,9 @@ public interface RegisterCenter {
 
     /**
      * 订阅所有服务变更
-     * @param registerCenterListener
+     * @param registerListenerProcess
      */
-    void subscribeAllServices(RegisterCenterListener registerCenterListener);
+    void subscribeAllServices(RegisterListenerProcess registerListenerProcess);
 
 
 }

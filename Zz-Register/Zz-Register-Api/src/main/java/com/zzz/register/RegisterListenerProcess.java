@@ -12,9 +12,9 @@ import java.util.Set;
  * 注册中心的监听器
  * 用来监听注册中心的一些变化
  */
-public interface RegisterCenterListener {
+public interface RegisterListenerProcess {
 
-    void onChange(ServiceDefinition serviceDefinition,
-                  Set<ServiceInstance> serviceInstanceSet);
+    void process(ServiceDefinition serviceDefinition,
+                   Set<ServiceInstance> serviceInstanceSet);
 
 }
