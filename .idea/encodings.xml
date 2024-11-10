@@ -14,12 +14,30 @@
     <file url="file://$PROJECT_DIR$/Zz-Config/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-GateWay-Core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-GateWay-Core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-Gateway-Common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-Gateway-Common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Register/Zz-Register-Api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Register/Zz-Register-Api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Register/Zz-Register-Nacos/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Register/Zz-Register-Nacos/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Register/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Zz-Register/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Config/Zz-Config-Api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Config/Zz-Config-Api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Config/Zz-Config-Nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Config/Zz-Config-Nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Config/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Register/Zz-Register-Api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Register/Zz-Register-Api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Register/Zz-Reister-Nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Register/Zz-Reister-Nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Register/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/Zz-Register/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Zz-RegisterAndConfig-Center/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

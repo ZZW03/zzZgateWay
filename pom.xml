@@ -10,12 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>Zz-Core</module>
-        <module>Zz-Register</module>
-        <module>Zz-Common</module>
-        <module>Zz-Config</module>
-        <module>Zz-Config/Zz-Config-Api</module>
-        <module>Zz-Config/Zz-Config-Nacos</module>
+        <module>Zz-GateWay-Core</module>
+        <module>Zz-Gateway-Common</module>
+        <module>Zz-RegisterAndConfig-Center</module>
     </modules>
 
     <properties>
