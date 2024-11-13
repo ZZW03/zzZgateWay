@@ -6,23 +6,26 @@ import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingMaintainFactory;
 import com.alibaba.nacos.api.naming.NamingMaintainService;
 import com.alibaba.nacos.api.naming.NamingService;
-import com.alibaba.nacos.api.naming.listener.Event;
 import com.alibaba.nacos.api.naming.listener.EventListener;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
 import com.alibaba.nacos.api.naming.pojo.Service;
 import com.alibaba.nacos.api.naming.pojo.ServiceInfo;
+import com.alibaba.nacos.common.executor.NameThreadFactory;
 import com.alibaba.nacos.common.utils.CollectionUtils;
 import com.zzz.api.RegisterCenterListener;
 import com.zzz.api.RegisterCenterSever;
+import com.zzz.constant.GatewayConst;
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -57,7 +60,7 @@ public class NacosRegister implements RegisterCenterSever {
 
     @Override
     public void register(ServiceDefinition serviceDefinition, ServiceInstance serviceInstance) {
-        Instance instance = converInstance(serviceInstance);
+        Instance instance = converInstance(serviceDefinition,serviceInstance);
         try {
             //注册
             namingService.registerInstance(serviceDefinition.getServiceName(),serviceDefinition.getEnv(),instance);
@@ -73,7 +76,7 @@ public class NacosRegister implements RegisterCenterSever {
 
     @Override
     public void deregister(ServiceDefinition serviceDefinition, ServiceInstance serviceInstance) {
-        Instance instance = converInstance(serviceInstance);
+        Instance instance = converInstance(serviceDefinition,serviceInstance);
         try{
             namingService.deregisterInstance(serviceDefinition.getServiceName(),serviceDefinition.getEnv(),instance);
 
@@ -85,8 +88,17 @@ public class NacosRegister implements RegisterCenterSever {
 
     @Override
     public void subscribeAllServices(RegisterCenterListener registerCenterListener) {
+
         // 进行订阅
         doSubscribeAllServices(registerCenterListener);
+
+        //todo 开一个定时任务进行 服务进行不断的订阅
+        //可能有新服务加入，所以需要有一个定时任务来检查
+        ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1, new NameThreadFactory(
+                "doSubscribeAllServices"));
+
+        //循环执行服务发现与订阅操作 每隔一秒去发现服务 去订阅服务 保存到本地缓存中
+        scheduledThreadPool.scheduleWithFixedDelay(() -> doSubscribeAllServices(registerCenterListener), 1, 1, TimeUnit.MINUTES);
     }
 
     private void doSubscribeAllServices(RegisterCenterListener registerCenterListener) {
@@ -131,7 +143,7 @@ public class NacosRegister implements RegisterCenterSever {
                                                 ServiceDefinition.class);
 
                                 //获取服务实例信息
-                                List<Instance> allInstances = namingService.getAllInstances(service.getName(), env);
+                                List<Instance> allInstances = namingService.getAllInstances(currentService.getName(), env);
                                 Set<ServiceInstance> set = new HashSet<>();
 
                                 for (Instance instance : allInstances) {
@@ -140,9 +152,9 @@ public class NacosRegister implements RegisterCenterSever {
                                                     ServiceInstance.class);
                                     set.add(serviceInstance);
                                 }
-
                                 //调用我们自己的订阅监听器
                                 registerCenterListener.process(serviceDefinition,set);
+
                             } catch (NacosException e) {
                                 throw new RuntimeException(e);
                             }
