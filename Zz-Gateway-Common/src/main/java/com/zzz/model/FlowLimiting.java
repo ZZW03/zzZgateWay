@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class FlowLimiting {
     /**
      * 限流方式 1是对用户信息进行限流 2是对访问路径进行限流 放入redis中限流
@@ -23,4 +21,12 @@ public class FlowLimiting {
      */
     Integer frequency;
 
+    public FlowLimiting(Integer type, Integer time, Integer frequency) {
+        this.type = type;
+        Time = time;
+        this.frequency = frequency;
+    }
+
+    public FlowLimiting() {
+    }
 }

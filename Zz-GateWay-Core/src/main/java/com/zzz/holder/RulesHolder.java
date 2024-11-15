@@ -2,10 +2,7 @@ package com.zzz.holder;
 
 import com.zzz.model.Rule;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -39,10 +36,7 @@ public class RulesHolder {
     /**
      * 前缀 - 规则
      */
-    static Map<String, Rule> preRules = new ConcurrentHashMap<>();
-
-
-
+    static Map<String, Set<Rule>> preRules = new ConcurrentHashMap<>();
 
 
     public void pullAll(List<Rule> Rules) {
@@ -51,9 +45,58 @@ public class RulesHolder {
             nameRules.put(r.getRuleName(),r);
             r.getPath().forEach(v->{
                 Set<Rule> set = pathRules.getOrDefault(v,new HashSet<>());
-
+                set.add(r);
+                pathRules.put(v,set);
+            });
+            r.getPrefix().forEach(p->{
+                Set<Rule> set = pathRules.getOrDefault(p,new HashSet<>());
+                set.add(r);
+                preRules.put(p,set);
             });
         });
+    }
+
+    public Rule getRuleById(long id) {
+        return rules.get(id);
+    }
+
+    public Rule getRuleByName(String name) {
+        return nameRules.get(name);
+    }
+
+    public Set<Rule> getRulesByPath(String path) {
+        return pathRules.get(path);
+    }
+
+    public Set<Rule> getPreRulesByPath(String path) {
+        return preRules.get(path);
+    }
+
+    public void deleteRuleById(long id) {
+        rules.remove(id);
+    }
+
+    public void deleteRuleByName(String name) {
+        nameRules.remove(name);
+    }
+
+    public void deletePreRulesByPath(String path) {
+        preRules.remove(path);
+    }
+
+    public void deletePreRulesByName(String name) {
+        preRules.remove(name);
+    }
+
+    public void clear(Map<Object,Object> map){
+        map.clear();
+    }
+
+    public void deleteAll() {
+        rules.clear();
+        nameRules.clear();
+        pathRules.clear();
+        preRules.clear();
     }
 
 }

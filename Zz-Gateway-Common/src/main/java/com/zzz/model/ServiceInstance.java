@@ -30,17 +30,17 @@ public class ServiceInstance {
     /**
      * 权重
      */
-    Integer weight;
+    Integer weight = 1;
 
     /**
      * 是否健康
      */
-    Boolean isHealthy;
+    Boolean isHealthy = true;
 
     /**
      * 是否启动
      */
-    Boolean isEnable;
+    Boolean isEnable = true;
 
 
 

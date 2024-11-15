@@ -62,8 +62,9 @@ public class NacosRegister implements RegisterCenterSever {
     public void register(ServiceDefinition serviceDefinition, ServiceInstance serviceInstance) {
         Instance instance = converInstance(serviceDefinition,serviceInstance);
         try {
+
             //注册
-            namingService.registerInstance(serviceDefinition.getServiceName(),serviceDefinition.getEnv(),instance);
+            namingService.registerInstance(serviceDefinition.getServiceName(),instance);
 
             //更新服务定义
             namingMaintainService.updateService(serviceDefinition.getServiceName(), serviceDefinition.getEnv(), 0,

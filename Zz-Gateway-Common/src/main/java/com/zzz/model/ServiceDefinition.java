@@ -18,4 +18,12 @@ public class ServiceDefinition {
     public String getEnv() {
         return env;
     }
+
+    public void setServiceName(String serviceName) {
+        ServiceName = serviceName;
+    }
+
+    public void setEnv(String env) {
+        this.env = env;
+    }
 }

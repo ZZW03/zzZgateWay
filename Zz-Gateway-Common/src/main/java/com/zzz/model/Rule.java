@@ -1,6 +1,7 @@
 package com.zzz.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import java.util.Set;
  *  2. 找路径匹配
  *  3. 找前缀匹配
  */
+@Builder
 public class Rule {
 
     /**
@@ -33,7 +35,7 @@ public class Rule {
     /**
      * 负载均衡策略
      */
-    private Integer loadBalancing;
+    Integer loadBalancing;
 
     /**
      * 匹配路径
@@ -43,7 +45,7 @@ public class Rule {
     /**
      * 前缀匹配规则
      */
-    String prefix;
+    Set<String> prefix;
 
     /**
      * 排序规则 false 升序  true 降序
@@ -101,11 +103,11 @@ public class Rule {
         this.path = path;
     }
 
-    public String getPrefix() {
+    public Set<String> getPrefix() {
         return prefix;
     }
 
-    public void setPrefix(String prefix) {
+    public void setPrefix(Set<String> prefix) {
         this.prefix = prefix;
     }
 
@@ -131,5 +133,20 @@ public class Rule {
 
     public void setFlowLimiting(FlowLimiting flowLimiting) {
         this.flowLimiting = flowLimiting;
+    }
+
+    public Rule(Long ruleId, String ruleName, String serverName, Integer loadBalancing, Set<String> path, Set<String> prefix, Boolean order, List<Filter> list, FlowLimiting flowLimiting) {
+        this.ruleId = ruleId;
+        this.ruleName = ruleName;
+        this.serverName = serverName;
+        this.loadBalancing = loadBalancing;
+        this.path = path;
+        this.prefix = prefix;
+        this.order = order;
+        this.list = list;
+        this.flowLimiting = flowLimiting;
+    }
+
+    public Rule() {
     }
 }
