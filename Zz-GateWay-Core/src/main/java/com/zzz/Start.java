@@ -1,7 +1,6 @@
 package com.zzz;
 
 import com.zzz.api.ConfigCenterSever;
-import com.zzz.api.RegisterCenterListener;
 import com.zzz.api.RegisterCenterSever;
 import com.zzz.config.Config;
 import com.zzz.config.ConfigLoader;
@@ -10,9 +9,7 @@ import com.zzz.holder.ServiceHolder;
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.ServiceLoader;
-import java.util.Set;
 
 @Slf4j
 public class Start {

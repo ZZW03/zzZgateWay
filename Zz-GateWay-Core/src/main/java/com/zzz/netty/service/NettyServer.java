@@ -4,10 +4,7 @@ import com.zzz.config.Config;
 import com.zzz.netty.NettyApi;
 import com.zzz.netty.process.NettyProcessor;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollServerSocketChannel;
@@ -68,6 +65,15 @@ public class NettyServer implements NettyApi {
                         );
                     }
                 });
+
+        try {
+            ChannelFuture sync = this.serverBootstrap.bind(config.getPort()).sync();
+            if (sync.isSuccess()) {
+                log.info("netty sever start by port {} successfully",config.getPort());
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

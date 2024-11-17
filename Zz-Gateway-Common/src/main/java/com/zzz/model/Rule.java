@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -148,5 +149,14 @@ public class Rule {
     }
 
     public Rule() {
+    }
+
+    public Filter getFilterConfigById(Long filterId) {
+        Optional<Filter> first = list.stream().filter(v -> v.getFilterId().equals(filterId)).findFirst();
+        return first.orElse(null);
+    }
+
+    public Filter getFilterConfigByName(String name){
+        return  list.stream().filter(v->v.getFilterName().equals(name)).findFirst().orElse(null);
     }
 }

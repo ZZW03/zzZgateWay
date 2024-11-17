@@ -6,4 +6,6 @@ public interface GatewayConst {
 
     String RULE_DATA_KEY ="api-gateway";
 
+    String UNIQUE_ID = "uniqueId";
+
 }

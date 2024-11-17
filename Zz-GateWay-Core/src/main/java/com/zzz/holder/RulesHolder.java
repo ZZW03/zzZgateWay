@@ -69,7 +69,13 @@ public class RulesHolder {
     }
 
     public Set<Rule> getPreRulesByPath(String path) {
-        return preRules.get(path);
+        for (Map.Entry<String, Set<Rule>> entry : preRules.entrySet()) {
+            String prefix = entry.getKey();
+            if (path.startsWith(prefix)) {
+                return entry.getValue();
+            }
+        }
+        return new HashSet<>(); // 如果没有匹配的前缀，返回一个空的 Set
     }
 
     public void deleteRuleById(long id) {

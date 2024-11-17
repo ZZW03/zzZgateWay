@@ -1,121 +1,52 @@
 {
   "rules": [
     {
-      "id": "user-private",
-      "name": "user-private",
-      "paths": [
-        "/user/private/user-info"
-      ],
-      "prefix": "/user/private",
-      "protocol": "http",
-      "serviceId": "backend-user-server",
-      "filterConfigs": [
+      "ruleId": 12345,
+      "ruleName": "Example Rule 1",
+      "serverName": "example-service-1",
+      "loadBalancing": 1,
+      "path": ["/api/v1/users", "/api/v1/products"],
+      "prefix": ["/api/v1", "/api/v2"],
+      "order": false,
+      "list": [
         {
-          "config": {
-            "load_balance": "RoundRobin"
-          },
-          "id": "load_balance_filter"
+          "filterId": 1,
+          "filterName": "AuthenticationFilter"
         },
         {
-          "id":"auth_filter"
+          "filterId": 2,
+          "filterName": "LoggingFilter"
         }
-      ]
+      ],
+      "flowLimiting": {
+        "type": 1,
+        "Time": 60,
+        "frequency": 100
+      }
     },
     {
-      "id": "user",
-      "name": "user",
-      "paths": [
-        "/user/login"
-      ],
-      "prefix": "/user",
-      "protocol": "http",
-      "serviceId": "backend-user-server",
-      "filterConfigs": [
+      "ruleId": 67890,
+      "ruleName": "Example Rule 2",
+      "serverName": "example-service-2",
+      "loadBalancing": 2,
+      "path": ["/api/v2/orders", "/api/v2/payments"],
+      "prefix": ["/api/v2", "/api/v3"],
+      "order": true,
+      "list": [
         {
-          "config": {
-            "load_balance": "Random"
-          },
-          "id": "load_balance_filter"
-        }
-      ]
-    },
-    {
-      "id": "http-server",
-      "name": "http-server",
-      "paths": [
-        "/http-server/ping"
-      ],
-      "prefix": "/http-server",
-      "protocol": "http",
-      "retryConfig": {
-        "times": 3
-      },
-      "serviceId": "backend-http-server",
-      "flowControlConfigs":[
+          "filterId": 3,
+          "filterName": "AuthorizationFilter"
+        },
         {
-          "type":"path",
-          "value":"/http-server/ping",
-          "model":"distributed",
-          "config":{
-            "duration":1,
-            "permits":1
-          }
+          "filterId": 4,
+          "filterName": "RateLimitingFilter"
         }
       ],
-      "hystrixConfigs":[{
-        "path":"/http-server/ping",
-        "timeoutInMilliseconds":5000,
-        "threadCoreSize":2,
-        "fallbackResponse":"熔断超时"
-      }],
-      "filterConfigs": [
-        {
-          "config": {
-            "load_balance": "ConsistentHash"
-            // "load_balance": "RoundRobin"
-            // "load_balance": "Random"
-            // "load_balance": "Weight"
-          },
-          "id": "load_balance_filter"
-        }
-      ,
-        {
-          "id": "auth_filter"
-        }
-      ,
-        {
-          "id":"flow_ctl_filter"
-        }
-      ,
-        {
-          "id": "mock_filter",
-          "config":{
-            "GET /http-server/ping":"this is Mock response can you see1?"
-          }
-        }
-      ]
-    },
-
-    {
-      "id": "http-dubbo-server",
-      "name": "http-dubbo-server",
-      "paths": [
-        "/rpc"
-      ],
-      "prefix": "/dubbo",
-      "protocol": "dubbo",
-      "retryConfig": {
-        "times": 3
-      },
-      "serviceId": "backend-dubbo-server",
-      "filterConfigs": [
-        {
-          "config": {
-            "load_balance": "RoundRobin"
-          },
-          "id": "load_balance_filter"
-        }
-      ]
+      "flowLimiting": {
+        "type": 2,
+        "Time": 30,
+        "frequency": 50
+      }
     }
   ]
 }
