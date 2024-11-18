@@ -25,6 +25,7 @@ public interface IContext {
      * 写回成功后，设置该标识，如果是Netty ，ctx.WriteAndFlush(response)
      */
     int COMPLETED = 2;
+
     /**
      * 整个网关请求完毕，彻底结束
      */

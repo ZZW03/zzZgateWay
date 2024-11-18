@@ -2,9 +2,8 @@ package com.zzz.holder;
 
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -26,7 +25,7 @@ public class ServiceHolder {
     /**
      * 服务-实例
      */
-    Map<String, Set<ServiceInstance>> ServiceInstanceMap = new ConcurrentHashMap<>();
+    Map<String, List<ServiceInstance>> ServiceInstanceMap = new ConcurrentHashMap<>();
 
     /**
      * 实例-实例id
@@ -34,7 +33,7 @@ public class ServiceHolder {
     Map<String,ServiceInstance> uniqueIdInstanceMap = new ConcurrentHashMap<>();
 
 
-    public void putAll(ServiceDefinition serviceDefinition, Set<ServiceInstance> serviceInstances){
+    public void putAll(ServiceDefinition serviceDefinition, List<ServiceInstance> serviceInstances){
         ServiceMap.put(serviceDefinition.getServiceName(), serviceDefinition);
         ServiceInstanceMap.put(serviceDefinition.getServiceName(), serviceInstances);
         serviceInstances.forEach(v->{
@@ -50,15 +49,15 @@ public class ServiceHolder {
         uniqueIdInstanceMap.put(uniqueId, serviceInstance);
     }
 
-    public void putServiceInstance(String Name,Set<ServiceInstance> set){
-        ServiceInstanceMap.put(Name,new HashSet<ServiceInstance>(ServiceInstanceMap.get(Name)));
+    public void putServiceInstance(String Name,List<ServiceInstance> set){
+        ServiceInstanceMap.put(Name,new ArrayList<>(ServiceInstanceMap.get(Name)));
     }
 
     public ServiceDefinition getServiceDefinitionByName(String serviceName){
         return ServiceMap.get(serviceName);
     }
 
-    public Set<ServiceInstance> getServiceInstancesByServiceName(String serviceName){
+    public List<ServiceInstance> getServiceInstancesByServiceName(String serviceName){
         return ServiceInstanceMap.get(serviceName);
     }
 

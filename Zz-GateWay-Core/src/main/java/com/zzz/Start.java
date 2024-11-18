@@ -9,6 +9,8 @@ import com.zzz.holder.ServiceHolder;
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 import java.util.ServiceLoader;
 
 @Slf4j
@@ -59,6 +61,8 @@ public class Start {
         registerCenterSever.subscribeAllServices((serviceDefinitions, serviceInstanceSet) -> ServiceHolder.getInstance().putAll(serviceDefinitions, serviceInstanceSet));
 
     }
+
+
 
 
 

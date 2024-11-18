@@ -6,6 +6,7 @@ package com.zzz.api;
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -15,5 +16,5 @@ import java.util.Set;
 public interface RegisterCenterListener {
 
     void process(ServiceDefinition serviceDefinition,
-                  Set<ServiceInstance> serviceInstanceSet);
+                  List<ServiceInstance> serviceInstanceSet);
 }

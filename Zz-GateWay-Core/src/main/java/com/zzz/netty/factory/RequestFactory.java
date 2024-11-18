@@ -50,6 +50,7 @@ public class RequestFactory {
     private static GatewayRequest doRequest(FullHttpRequest fullHttpRequest, ChannelHandlerContext ctx) {
 
         HttpHeaders headers = fullHttpRequest.headers();
+
         //	从header头获取必须要传入的关键属性 uniqueId
         String uniqueId = headers.get(GatewayConst.UNIQUE_ID);
 

@@ -56,7 +56,7 @@ public class Rule {
     /**
      * 过滤器列表
      */
-    List<Filter> list;
+    List<Filter> filters;
 
     /**
      * 限流规则
@@ -120,12 +120,12 @@ public class Rule {
         this.order = order;
     }
 
-    public List<Filter> getList() {
-        return list;
+    public List<Filter> getFilters() {
+        return filters;
     }
 
-    public void setList(List<Filter> list) {
-        this.list = list;
+    public void setFilters(List<Filter> list) {
+        this.filters = list;
     }
 
     public FlowLimiting getFlowLimiting() {
@@ -144,7 +144,7 @@ public class Rule {
         this.path = path;
         this.prefix = prefix;
         this.order = order;
-        this.list = list;
+        this.filters = list;
         this.flowLimiting = flowLimiting;
     }
 
@@ -152,11 +152,11 @@ public class Rule {
     }
 
     public Filter getFilterConfigById(Long filterId) {
-        Optional<Filter> first = list.stream().filter(v -> v.getFilterId().equals(filterId)).findFirst();
+        Optional<Filter> first = filters.stream().filter(v -> v.getFilterId().equals(filterId)).findFirst();
         return first.orElse(null);
     }
 
     public Filter getFilterConfigByName(String name){
-        return  list.stream().filter(v->v.getFilterName().equals(name)).findFirst().orElse(null);
+        return  filters.stream().filter(v->v.getFilterName().equals(name)).findFirst().orElse(null);
     }
 }

@@ -19,10 +19,8 @@ import com.zzz.constant.GatewayConst;
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
 import lombok.extern.slf4j.Slf4j;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -145,7 +143,7 @@ public class NacosRegister implements RegisterCenterSever {
 
                                 //获取服务实例信息
                                 List<Instance> allInstances = namingService.getAllInstances(currentService.getName(), env);
-                                Set<ServiceInstance> set = new HashSet<>();
+                                List<ServiceInstance> set = new ArrayList<>();
 
                                 for (Instance instance : allInstances) {
                                     ServiceInstance serviceInstance =

@@ -161,7 +161,6 @@ public class GatewayRequest implements IGatewayRequest{
         this.path  = queryStringDecoder.path();
         this.modifyHost = host;
         this.modifyPath = path;
-
         this.modifyScheme = BasicConst.HTTP_PREFIX_SEPARATOR;
         this.requestBuilder = new RequestBuilder();
         this.requestBuilder.setMethod(getMethod().name());
