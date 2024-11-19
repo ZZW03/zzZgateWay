@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848  # Nacos ??????
+        group: dev
+        metadata:
+          ServiceName: test-service-1
+          env: dev
+  application:
+    name: test-service-1  # ????
