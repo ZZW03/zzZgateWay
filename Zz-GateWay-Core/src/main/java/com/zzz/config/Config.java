@@ -57,7 +57,7 @@ public class Config {
      */
     String RegisterCenterEnv = "dev";
 
-    //*********************************************netty***************************************************//
+    //*********************************************netty服务端***************************************************//
 
     /**
      * 负责连接
@@ -74,6 +74,20 @@ public class Config {
      */
     Integer maxLength = 64 * 1024 * 1024;
 
+
+    //**************************************************netty客户端******************************************//
+
+    Integer httpConnectTimeout = 30 * 1000;;
+
+    Integer httpRequestTimeout = 30 * 1000;
+
+    Integer httpMaxRequestRetry = 1 ;
+
+    Integer httpMaxConnections = 10000;
+
+    Integer httpConnectionsPerHost = 8000;
+
+    Integer httpPooledConnectionIdleTimeout = 60 * 1000;
 
 
     // ********************************************基础方法**************************************************//
@@ -173,5 +187,53 @@ public class Config {
 
     public void setMaxLength(Integer maxLength) {
         this.maxLength = maxLength;
+    }
+
+    public Integer getHttpConnectTimeout() {
+        return httpConnectTimeout;
+    }
+
+    public void setHttpConnectTimeout(Integer httpConnectTimeout) {
+        this.httpConnectTimeout = httpConnectTimeout;
+    }
+
+    public Integer getHttpRequestTimeout() {
+        return httpRequestTimeout;
+    }
+
+    public void setHttpRequestTimeout(Integer httpRequestTimeout) {
+        this.httpRequestTimeout = httpRequestTimeout;
+    }
+
+    public Integer getHttpMaxRequestRetry() {
+        return httpMaxRequestRetry;
+    }
+
+    public void setHttpMaxRequestRetry(Integer httpMaxRequestRetry) {
+        this.httpMaxRequestRetry = httpMaxRequestRetry;
+    }
+
+    public Integer getHttpMaxConnections() {
+        return httpMaxConnections;
+    }
+
+    public void setHttpMaxConnections(Integer httpMaxConnections) {
+        this.httpMaxConnections = httpMaxConnections;
+    }
+
+    public Integer getHttpConnectionsPerHost() {
+        return httpConnectionsPerHost;
+    }
+
+    public void setHttpConnectionsPerHost(Integer httpConnectionsPerHost) {
+        this.httpConnectionsPerHost = httpConnectionsPerHost;
+    }
+
+    public Integer getHttpPooledConnectionIdleTimeout() {
+        return httpPooledConnectionIdleTimeout;
+    }
+
+    public void setHttpPooledConnectionIdleTimeout(Integer httpPooledConnectionIdleTimeout) {
+        this.httpPooledConnectionIdleTimeout = httpPooledConnectionIdleTimeout;
     }
 }

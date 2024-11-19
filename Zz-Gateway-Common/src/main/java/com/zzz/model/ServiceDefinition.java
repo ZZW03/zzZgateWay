@@ -26,4 +26,12 @@ public class ServiceDefinition {
     public void setEnv(String env) {
         this.env = env;
     }
+
+    public ServiceDefinition(String serviceName, String env) {
+        ServiceName = serviceName;
+        this.env = env;
+    }
+
+    public ServiceDefinition() {
+    }
 }

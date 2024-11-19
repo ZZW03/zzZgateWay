@@ -42,7 +42,7 @@ public class RulesHolder {
     public void pullAll(List<Rule> Rules) {
         Rules.forEach(r->{
             rules.put(r.getRuleId(),r);
-            nameRules.put(r.getRuleName(),r);
+            nameRules.put(r.getServerName(),r);
             r.getPath().forEach(v->{
                 Set<Rule> set = pathRules.getOrDefault(v,new HashSet<>());
                 set.add(r);

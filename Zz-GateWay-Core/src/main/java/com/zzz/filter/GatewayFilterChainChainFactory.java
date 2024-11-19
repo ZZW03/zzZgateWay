@@ -35,6 +35,7 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
     private Cache<String, GatewayFilterChain> chainCache = Caffeine.newBuilder().recordStats().expireAfterWrite(10,
             TimeUnit.MINUTES).build();
 
+
     @Override
     public GatewayFilterChain buildFilterChain(GatewayContext ctx) throws Exception {
         return chainCache.get(ctx.getRule().getRuleId().toString(),k->doBuildFilterChain(ctx.getRule()));
@@ -42,6 +43,7 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
 
     private GatewayFilterChain doBuildFilterChain(Rule rule) {
         GatewayFilterChain gatewayFilterChain = new GatewayFilterChain();
+
         rule.getFilters().forEach(filter->{
             Long filterId = filter.getFilterId();
             if (filter != null){
@@ -59,14 +61,14 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
         ServiceLoader<Filter> serviceLoader = ServiceLoader.load(Filter.class);
         serviceLoader.forEach(filter -> {
             FilterAspect annotation = filter.getClass().getAnnotation(FilterAspect.class);
-            log.info("load filter success:{},{},{},{}", filter.getClass(), annotation.id(), annotation.name(),
-                    annotation.order());
             if (annotation != null) {
                 //添加到过滤集合
                 String filterId = annotation.id();
                 if (StringUtils.isEmpty(filterId)) {
                     filterId = filter.getClass().getName();
                 }
+                log.info("load filter success:{},{},{},{}", filter.getClass(), annotation.id(), annotation.name(),
+                        annotation.order());
                 processorFilterIdMap.put(filterId, filter);
             }
         });

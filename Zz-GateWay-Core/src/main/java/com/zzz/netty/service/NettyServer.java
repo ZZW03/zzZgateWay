@@ -3,10 +3,10 @@ package com.zzz.netty.service;
 import com.zzz.config.Config;
 import com.zzz.netty.NettyApi;
 import com.zzz.netty.process.NettyProcessor;
+import com.zzz.netty.process.impl.NettyCoreProcessor;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.epoll.Epoll;
-import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -14,6 +14,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.HttpServerExpectContinueHandler;
 import io.netty.util.concurrent.DefaultThreadFactory;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
@@ -30,9 +31,11 @@ public class NettyServer implements NettyApi {
     private EventLoopGroup eventLoopGroupBoss;
 
     // worker线程组，用于处理已经建立的连接的后续操作
+    @Getter
     private EventLoopGroup eventLoopGroupWoker;
 
-    NettyProcessor nettyProcessor;
+
+    NettyProcessor nettyProcessor = new NettyCoreProcessor();
 
     @Override
     public void init(Config config) {
@@ -48,7 +51,6 @@ public class NettyServer implements NettyApi {
                 .channel(Epoll.isAvailable() ? EpollServerSocketChannel.class : NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)            // TCP连接的最大队列长度
                 .option(ChannelOption.SO_REUSEADDR, true)          // 允许端口重用
-                .option(ChannelOption.SO_KEEPALIVE, true)          // 保持连接检测
                 .childOption(ChannelOption.TCP_NODELAY, true)      // 禁用Nagle算法，适用于小数据即时传输
                 .childOption(ChannelOption.SO_SNDBUF, 65535)       // 设置发送缓冲区大小
                 .childOption(ChannelOption.SO_RCVBUF, 65535)       // 设置接收缓冲区大小
@@ -84,19 +86,11 @@ public class NettyServer implements NettyApi {
 
     private void BuildEvenLoop() {
         this.serverBootstrap = new ServerBootstrap();
-        if (Epoll.isAvailable()) {
-            this.eventLoopGroupBoss = new EpollEventLoopGroup(config.getEventLoopGroupBossNum(),
-                    new DefaultThreadFactory("epoll-netty-boss-nio"));
-            this.eventLoopGroupWoker = new EpollEventLoopGroup(config.getEventLoopGroupWorkerNum(),
-                    new DefaultThreadFactory("epoll-netty-woker-nio"));
-        } else {
-            // 否则使用默认的NIO模型
-            this.eventLoopGroupBoss = new NioEventLoopGroup(config.getEventLoopGroupBossNum(),
-                    new DefaultThreadFactory("default-netty-boss-nio"));
-            this.eventLoopGroupWoker = new NioEventLoopGroup(config.getEventLoopGroupWorkerNum(),
-                    new DefaultThreadFactory("default-netty-woker-nio"));
-        }
+        // 否则使用默认的NIO模型
+        this.eventLoopGroupBoss = new NioEventLoopGroup(config.getEventLoopGroupBossNum(),
+                new DefaultThreadFactory("default-netty-boss-nio"));
+        this.eventLoopGroupWoker = new NioEventLoopGroup(config.getEventLoopGroupWorkerNum(),
+                new DefaultThreadFactory("default-netty-woker-nio"));
     }
-
 
 }

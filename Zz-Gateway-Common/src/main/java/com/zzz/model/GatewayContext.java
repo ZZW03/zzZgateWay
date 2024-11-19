@@ -18,7 +18,7 @@ public class GatewayContext extends BasicContext{
     /**
      * 重试次数
      */
-    private int currentRetryTimes;
+    private int currentRetryTimes = 1;
 
     /**
      * 灰度

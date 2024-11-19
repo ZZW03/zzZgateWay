@@ -159,4 +159,19 @@ public class Rule {
     public Filter getFilterConfigByName(String name){
         return  filters.stream().filter(v->v.getFilterName().equals(name)).findFirst().orElse(null);
     }
+
+    @Override
+    public String toString() {
+        return "Rule{" +
+                "ruleId=" + ruleId +
+                ", ruleName='" + ruleName + '\'' +
+                ", serverName='" + serverName + '\'' +
+                ", loadBalancing=" + loadBalancing +
+                ", path=" + path +
+                ", prefix=" + prefix +
+                ", order=" + order +
+                ", filters=" + filters +
+                ", flowLimiting=" + flowLimiting +
+                '}';
+    }
 }

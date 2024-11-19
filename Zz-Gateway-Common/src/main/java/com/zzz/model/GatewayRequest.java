@@ -134,18 +134,6 @@ public class GatewayRequest implements IGatewayRequest{
      */
     private final RequestBuilder requestBuilder;
 
-    /**
-     * 构造器
-     * @param uniqueId
-     * @param charset
-     * @param clientIp
-     * @param host
-     * @param uri
-     * @param method
-     * @param contentType
-     * @param headers
-     * @param fullHttpRequest
-     */
     public GatewayRequest(String uniqueId, Charset charset, String clientIp, String host, String uri, HttpMethod method, String contentType, HttpHeaders headers, FullHttpRequest fullHttpRequest) {
         this.uniqueId = uniqueId;
         this.beginTime = System.currentTimeMillis();
@@ -331,5 +319,29 @@ public class GatewayRequest implements IGatewayRequest{
         return requestBuilder.build();
     }
 
-
+    @Override
+    public String toString() {
+        return "GatewayRequest{" +
+                "uniqueId='" + uniqueId + '\'' +
+                ", beginTime=" + beginTime +
+                ", charset=" + charset +
+                ", clientIp='" + clientIp + '\'' +
+                ", host='" + host + '\'' +
+                ", path='" + path + '\'' +
+                ", uri='" + uri + '\'' +
+                ", method=" + method +
+                ", contentType='" + contentType + '\'' +
+                ", headers=" + headers +
+                ", queryStringDecoder=" + queryStringDecoder +
+                ", fullHttpRequest=" + fullHttpRequest +
+                ", body='" + body + '\'' +
+                ", userId=" + userId +
+                ", cookieMap=" + cookieMap +
+                ", postParameters=" + postParameters +
+                ", modifyScheme='" + modifyScheme + '\'' +
+                ", modifyHost='" + modifyHost + '\'' +
+                ", modifyPath='" + modifyPath + '\'' +
+                ", requestBuilder=" + requestBuilder +
+                '}';
+    }
 }

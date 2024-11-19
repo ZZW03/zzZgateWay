@@ -2,11 +2,13 @@ package com.zzz.holder;
 
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+@Slf4j
 public class ServiceHolder {
 
     private static class  SingletonHolder{
@@ -34,6 +36,11 @@ public class ServiceHolder {
 
 
     public void putAll(ServiceDefinition serviceDefinition, List<ServiceInstance> serviceInstances){
+        if (serviceDefinition == null || serviceInstances == null){
+            return;
+        }
+
+        log.info("开始存储规则");
         ServiceMap.put(serviceDefinition.getServiceName(), serviceDefinition);
         ServiceInstanceMap.put(serviceDefinition.getServiceName(), serviceInstances);
         serviceInstances.forEach(v->{
@@ -54,7 +61,14 @@ public class ServiceHolder {
     }
 
     public ServiceDefinition getServiceDefinitionByName(String serviceName){
-        return ServiceMap.get(serviceName);
+        ServiceDefinition serviceDefinition = null;
+        try{
+             serviceDefinition = ServiceMap.get(serviceName);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+        return serviceDefinition;
     }
 
     public List<ServiceInstance> getServiceInstancesByServiceName(String serviceName){

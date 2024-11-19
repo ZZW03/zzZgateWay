@@ -5,10 +5,7 @@ import com.zzz.constant.BasicConst;
 import com.zzz.constant.GatewayConst;
 import com.zzz.holder.RulesHolder;
 import com.zzz.holder.ServiceHolder;
-import com.zzz.model.GatewayContext;
-import com.zzz.model.GatewayRequest;
-import com.zzz.model.Rule;
-import com.zzz.model.ServiceDefinition;
+import com.zzz.model.*;
 import io.micrometer.common.util.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -17,6 +14,7 @@ import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
@@ -25,9 +23,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class RequestFactory {
 
     public static GatewayContext doContext(FullHttpRequest request, ChannelHandlerContext ctx) {
+        log.info("开始构建请求上下文");
         GatewayRequest gateWayRequest = doRequest(request, ctx);
 
         //	根据请求对象里的uniqueId，获取资源服务信息(也就是服务定义信息)
@@ -36,6 +36,11 @@ public class RequestFactory {
 
         //根据请求对象获取规则
         Rule rule = getRule(gateWayRequest, serviceDefinition.getServiceName());
+
+        log.info("执行的rule{}",rule);
+        List<ServiceInstance> serviceInstancesByServiceName = ServiceHolder.getInstance().getServiceInstancesByServiceName(serviceDefinition.getServiceName());
+
+        gateWayRequest.setModifyHost(serviceInstancesByServiceName.get(0).getIp() + ":" + serviceInstancesByServiceName.get(0).getPort());
 
         GatewayContext gatewayContext = new GatewayContext("http", ctx,
                 HttpUtil.isKeepAlive(request), gateWayRequest, rule,0);
@@ -98,13 +103,14 @@ public class RequestFactory {
      * @return
      */
     private static Rule getRule(GatewayRequest gateWayRequest, String serviceId) {
-        String key = serviceId + "." + gateWayRequest.getPath();
+
+        String key = gateWayRequest.getUniqueId();
 
         Rule rule = RulesHolder.getInstance().getRuleByName(key);
+
         if (rule != null) {
             return rule;
         }
-
         Optional<Rule> first = RulesHolder.getInstance().getRulesByPath(gateWayRequest.getPath()).stream().findFirst();
         if(first.isPresent()){
             return first.get();

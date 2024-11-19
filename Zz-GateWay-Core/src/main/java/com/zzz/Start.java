@@ -8,6 +8,8 @@ import com.zzz.holder.RulesHolder;
 import com.zzz.holder.ServiceHolder;
 import com.zzz.model.ServiceDefinition;
 import com.zzz.model.ServiceInstance;
+import com.zzz.netty.client.NettyClient;
+import com.zzz.netty.service.NettyServer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -37,11 +39,23 @@ public class Start {
         });
         registerCenterSever.init(config.getRegisterCenterAddress(),config.getRegisterCenterEnv());
         doRegisterAndSubScribe(config, registerCenterSever);
-
+        
         //todo netty服务的启动已经过滤器链的执行
+        StartNetty(config);
 
 
         //todo 完善工作
+    }
+
+    private static void StartNetty(Config config) {
+        NettyServer nettyServer = new NettyServer();
+        nettyServer.init(config);
+        nettyServer.start();
+
+        NettyClient client = new NettyClient(config,nettyServer.getEventLoopGroupWoker());
+        client.init(config);
+        client.start();
+
     }
 
 

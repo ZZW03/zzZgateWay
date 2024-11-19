@@ -110,8 +110,10 @@ public class NacosRegister implements RegisterCenterSever {
 
             int pageNo = 1;
             int pageSize = 100;
+
             //分页从nacos拿到所有的服务列表
-            List<String> serviseList = namingService.getServicesOfServer(pageNo, pageSize, env).getData();
+            List<String> serviseList = namingService.getServicesOfServer(pageNo, pageSize,env).getData();
+
 
             //拿到所有的服务名称后进行遍历
             while (CollectionUtils.isNotEmpty(serviseList)) {
@@ -126,6 +128,7 @@ public class NacosRegister implements RegisterCenterSever {
                     //nacos事件监听器 订阅当前服务
                     //这里我们需要自己实现一个nacos的事件订阅类 来具体执行订阅执行时的操作
                     EventListener eventListener = event -> {
+
                         //先判断是否是注册中心事件
                         if (event instanceof NamingEvent) {
                             log.info("the triggered event info is：{}", JSON.toJSON(event));
@@ -136,22 +139,27 @@ public class NacosRegister implements RegisterCenterSever {
                             try {
                                 //获取服务定义信息
                                 Service currentService = namingMaintainService.queryService(serviceName, env);
+
                                 //得到服务定义信息
-                                ServiceDefinition serviceDefinition =
-                                        JSON.parseObject(currentService.getMetadata().get(GatewayConst.META_DATA_KEY),
-                                                ServiceDefinition.class);
+                                ServiceDefinition serviceDefinition = new ServiceDefinition(currentService.getName(),currentService.getGroupName());
 
                                 //获取服务实例信息
                                 List<Instance> allInstances = namingService.getAllInstances(currentService.getName(), env);
                                 List<ServiceInstance> set = new ArrayList<>();
 
                                 for (Instance instance : allInstances) {
-                                    ServiceInstance serviceInstance =
-                                            JSON.parseObject(instance.getMetadata().get(GatewayConst.META_DATA_KEY),
-                                                    ServiceInstance.class);
+                                    ServiceInstance serviceInstance = new ServiceInstance();
+                                    serviceInstance.setUniqueId(instance.getInstanceId());
+                                    serviceInstance.setServiceName(instance.getServiceName());
+                                    serviceInstance.setEnable(true);
+                                    serviceInstance.setIp(instance.getIp());
+                                    serviceInstance.setPort(instance.getPort());
+                                    serviceInstance.setHealthy(true);
                                     set.add(serviceInstance);
                                 }
+                                
                                 //调用我们自己的订阅监听器
+                                log.info("开始订阅");
                                 registerCenterListener.process(serviceDefinition,set);
 
                             } catch (NacosException e) {

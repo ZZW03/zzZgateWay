@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Zz-Config/Zz-ConfigApi/pom.xml" />
         <option value="$PROJECT_DIR$/test/pom.xml" />
+        <option value="$PROJECT_DIR$/HttpTest/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
