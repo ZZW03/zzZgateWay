@@ -3,6 +3,7 @@ package com.zzz.filter.loadbalance;
 import com.zzz.constant.LoadBalancingConst;
 import com.zzz.filter.Filter;
 import com.zzz.filter.FilterAspect;
+import com.zzz.filter.loadbalance.impl.ConsistentHashRobin;
 import com.zzz.filter.loadbalance.impl.RandomRobin;
 import com.zzz.filter.loadbalance.impl.RoundRobin;
 import com.zzz.model.GatewayContext;
@@ -40,7 +41,7 @@ public class LoadBalanceFilter implements Filter {
             loadBalanceGatewayRule = RandomRobin.getInstance();
 
         } else if (loadBalancing.equals(LoadBalancingConst.CONSISTENT_HASH_ROBIN.getStrategy())) {
-
+            loadBalanceGatewayRule = ConsistentHashRobin.getInstance();
         }
         return loadBalanceGatewayRule;
     }
