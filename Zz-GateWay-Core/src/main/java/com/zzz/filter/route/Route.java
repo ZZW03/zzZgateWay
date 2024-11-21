@@ -26,15 +26,12 @@ public class Route implements Filter {
     private  CompletableFuture<Response> route(GatewayContext ctx){
         Request request = ctx.getRequest().build();
 
-        log.info("发起请求 {}",request);
-
         //执行具体的请求 并得到一个CompleatableFuture对象用于帮助我们执行后续的处理
         CompletableFuture<Response> future = AsyncHttpHelper.getInstance().execute(request);
 
-//
-//        future.whenComplete((response, throwable) -> {
-//            complete(request, response, throwable, ctx);
-//        });
+        future.whenComplete((response, throwable) -> {
+            complete(request, response, throwable, ctx);
+        });
 
         return null;
 

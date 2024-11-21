@@ -1,1 +1,2 @@
 com.zzz.filter.route.Route
+com.zzz.filter.loadbalance.LoadBalanceFilter

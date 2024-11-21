@@ -21,9 +21,7 @@ public class NettyCoreProcessor implements NettyProcessor {
             GatewayContext gatewayContext = RequestFactory.doContext(request, ctx);
             GatewayFilterChainChainFactory.getInstance().buildFilterChain(gatewayContext).doFilter(gatewayContext);
         }catch (Exception e){
-
         }
-
     }
 
 }

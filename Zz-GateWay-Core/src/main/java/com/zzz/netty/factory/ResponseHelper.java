@@ -10,7 +10,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.handler.codec.http.*;
 import lombok.extern.slf4j.Slf4j;
-
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -92,7 +91,6 @@ public class ResponseHelper {
 		
 		//	释放资源
 		context.releaseRequest();
-		
 		if(context.isWritten()) {
 
 			//	1：第一步构建响应对象，并写回数据

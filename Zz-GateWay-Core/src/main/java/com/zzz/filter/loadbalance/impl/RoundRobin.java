@@ -19,7 +19,9 @@ public class RoundRobin implements LoadBalanceGatewayRule {
     private static Map<String,RoundRobin> INSTANCES = new HashMap<String,RoundRobin>();
 
     public static RoundRobin getInstance(String uniqueId){
-        return INSTANCES.get(uniqueId) == null?null:INSTANCES.get(uniqueId);
+        RoundRobin orDefault = INSTANCES.getOrDefault(uniqueId, new RoundRobin());
+        INSTANCES.put(uniqueId, orDefault);
+        return orDefault;
     }
 
     @Override

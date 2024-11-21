@@ -48,8 +48,11 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
             Long filterId = filter.getFilterId();
             if (filter != null){
                 gatewayFilterChain.addFilter(processorFilterIdMap.get(filterId.toString()));
+            }else{
+                log.error("{} is null", filterId);
             }
         });
+
         return gatewayFilterChain;
     }
 
