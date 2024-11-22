@@ -44,9 +44,9 @@ public class AuthorizeFilter implements Filter {
                 .sign(algorithm);
     }
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        System.out.println(createJwtToken());
 //
 //        parseJwtToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMTIzIiwiZXhwIjoxNzMyMjc3MDEwLCJpYXQiOjE3MzIyNDEwMTB9.MqrZFZ79BkCUT9c58C6YGITCOL5J7Xw9Ls0Jjx25-nE");
-//    }
+    }
 }

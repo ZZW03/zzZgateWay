@@ -100,12 +100,10 @@ public class GatewayResponse {
             objectNode.put(JSONUtil.CODE, code.getCode());
             objectNode.putPOJO(JSONUtil.DATA, code.getMessage());
         } else {
-
             objectNode.put(JSONUtil.STATUS, ResponseCode.SUCCESS.getStatus().code());
             objectNode.put(JSONUtil.CODE, ResponseCode.SUCCESS.getCode());
             objectNode.putPOJO(JSONUtil.DATA, data);
         }
-
 
         GatewayResponse response = new GatewayResponse();
         response.setHttpResponseStatus(ResponseCode.SUCCESS.getStatus());

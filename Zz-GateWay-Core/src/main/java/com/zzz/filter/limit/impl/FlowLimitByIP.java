@@ -29,7 +29,8 @@ public class FlowLimitByIP implements FlowLimit {
 
         String s = jedis.get(clientIp);
         if (s == null) {
-            jedis.setex(clientIp, time, "1");
+            jedis.set(clientIp,  "1");
+            jedis.expire(clientIp, time);
         } else {
             long currentCount = Long.parseLong(s);
             if (currentCount + 1 >= frequency) {

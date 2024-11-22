@@ -43,7 +43,6 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
 
     private GatewayFilterChain doBuildFilterChain(Rule rule) {
         GatewayFilterChain gatewayFilterChain = new GatewayFilterChain();
-
         rule.getFilters().forEach(filter->{
             Long filterId = filter.getFilterId();
             if (filter != null){

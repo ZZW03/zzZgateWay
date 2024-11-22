@@ -88,9 +88,11 @@ public class ResponseHelper {
 	 * 写回响应信息方法
 	 */
 	public static void writeResponse(IContext context) {
-		
+
+
 		//	释放资源
 		context.releaseRequest();
+
 		if(context.isWritten()) {
 
 			//	1：第一步构建响应对象，并写回数据
@@ -108,10 +110,10 @@ public class ResponseHelper {
 						failureCount.incrementAndGet();
 					}
 				});
-
 			} 
 			//	长连接：
 			else {
+
 				httpResponse.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
 				context.getNettyCtx().writeAndFlush(httpResponse).addListener((ChannelFutureListener) future1 -> {
 					if (future1.isSuccess() &&

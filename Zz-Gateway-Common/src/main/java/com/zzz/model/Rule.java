@@ -63,6 +63,11 @@ public class Rule {
      */
     FlowLimiting flowLimiting;
 
+    /**
+     * 熔断措施
+     */
+    HystrixConfig hystrixConfig;
+
 
     public Long getRuleId() {
         return ruleId;
@@ -136,20 +141,6 @@ public class Rule {
         this.flowLimiting = flowLimiting;
     }
 
-    public Rule(Long ruleId, String ruleName, String serverName, Integer loadBalancing, Set<String> path, Set<String> prefix, Boolean order, List<Filter> list, FlowLimiting flowLimiting) {
-        this.ruleId = ruleId;
-        this.ruleName = ruleName;
-        this.serverName = serverName;
-        this.loadBalancing = loadBalancing;
-        this.path = path;
-        this.prefix = prefix;
-        this.order = order;
-        this.filters = list;
-        this.flowLimiting = flowLimiting;
-    }
-
-    public Rule() {
-    }
 
     public Filter getFilterConfigById(Long filterId) {
         Optional<Filter> first = filters.stream().filter(v -> v.getFilterId().equals(filterId)).findFirst();
@@ -160,18 +151,28 @@ public class Rule {
         return  filters.stream().filter(v->v.getFilterName().equals(name)).findFirst().orElse(null);
     }
 
-    @Override
-    public String toString() {
-        return "Rule{" +
-                "ruleId=" + ruleId +
-                ", ruleName='" + ruleName + '\'' +
-                ", serverName='" + serverName + '\'' +
-                ", loadBalancing=" + loadBalancing +
-                ", path=" + path +
-                ", prefix=" + prefix +
-                ", order=" + order +
-                ", filters=" + filters +
-                ", flowLimiting=" + flowLimiting +
-                '}';
+
+    public HystrixConfig getHystrixConfig() {
+        return hystrixConfig;
+    }
+
+    public void setHystrixConfig(HystrixConfig hystrixConfig) {
+        this.hystrixConfig = hystrixConfig;
+    }
+
+    public Rule() {
+    }
+
+    public Rule(Long ruleId, String ruleName, String serverName, Integer loadBalancing, Set<String> path, Set<String> prefix, Boolean order, List<Filter> filters, FlowLimiting flowLimiting, HystrixConfig hystrixConfig) {
+        this.ruleId = ruleId;
+        this.ruleName = ruleName;
+        this.serverName = serverName;
+        this.loadBalancing = loadBalancing;
+        this.path = path;
+        this.prefix = prefix;
+        this.order = order;
+        this.filters = filters;
+        this.flowLimiting = flowLimiting;
+        this.hystrixConfig = hystrixConfig;
     }
 }

@@ -43,7 +43,7 @@ public class GatewayFilterChain {
                 }
             }
         }catch (Exception e){
-            log.error("执行过滤器发生异常,异常信息：{}",e.getMessage());
+            log.error("执行过滤器发生异常,异常信息：{}", e.getClass());
             throw e;
         }
         return ctx;
