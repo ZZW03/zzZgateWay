@@ -5,6 +5,7 @@ import com.zzz.model.FlowLimiting;
 import com.zzz.model.GatewayContext;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.SetParams;
 
 
 @Slf4j
@@ -29,8 +30,7 @@ public class FlowLimitByIP implements FlowLimit {
 
         String s = jedis.get(clientIp);
         if (s == null) {
-            jedis.set(clientIp,  "1");
-            jedis.expire(clientIp, time);
+            jedis.set(clientIp,  "1",new SetParams().px(time));
         } else {
             long currentCount = Long.parseLong(s);
             if (currentCount + 1 >= frequency) {
