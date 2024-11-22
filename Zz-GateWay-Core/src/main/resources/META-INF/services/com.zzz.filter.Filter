@@ -1,2 +1,4 @@
 com.zzz.filter.route.Route
 com.zzz.filter.loadbalance.LoadBalanceFilter
+com.zzz.filter.limit.LimitFilter
+com.zzz.filter.authorization.AuthorizeFilter

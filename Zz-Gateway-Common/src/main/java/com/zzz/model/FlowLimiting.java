@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class FlowLimiting {
     /**
-     * 限流方式 1是对用户信息进行限流 2是对访问路径进行限流 放入redis中限流
+     * 限流方式 0是对ip进行限流 1是对用户信息进行限流 2是对访问路径进行限流 放入redis中限流
      */
     Integer type;
 
