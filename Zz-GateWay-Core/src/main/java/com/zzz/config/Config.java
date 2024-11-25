@@ -1,5 +1,7 @@
 package com.zzz.config;
 
+import com.lmax.disruptor.*;
+
 /**
  * 本地服务的配置
  */
@@ -88,6 +90,14 @@ public class Config {
     Integer httpConnectionsPerHost = 8000;
 
     Integer httpPooledConnectionIdleTimeout = 60 * 1000;
+
+    //*******************************************disruptor******************************8
+
+     Integer bufferSize = 1024 * 16;
+
+     Integer processThread = Runtime.getRuntime().availableProcessors();
+
+     String waitStrategy ="blocking";
 
 
     // ********************************************基础方法**************************************************//
@@ -235,5 +245,41 @@ public class Config {
 
     public void setHttpPooledConnectionIdleTimeout(Integer httpPooledConnectionIdleTimeout) {
         this.httpPooledConnectionIdleTimeout = httpPooledConnectionIdleTimeout;
+    }
+
+    public Integer getBufferSize() {
+        return bufferSize;
+    }
+
+    public void setBufferSize(Integer bufferSize) {
+        this.bufferSize = bufferSize;
+    }
+
+    public Integer getProcessThread() {
+        return processThread;
+    }
+
+    public void setProcessThread(Integer processThread) {
+        this.processThread = processThread;
+    }
+
+
+    public void setWaitStrategy(String waitStrategy) {
+        this.waitStrategy = waitStrategy;
+    }
+
+    public WaitStrategy getWaitStrategy(){
+        switch (waitStrategy){
+            case "blocking":
+                return  new BlockingWaitStrategy();
+            case "busySpin":
+                return  new BusySpinWaitStrategy();
+            case "yielding":
+                return  new YieldingWaitStrategy();
+            case "sleeping":
+                return  new SleepingWaitStrategy();
+            default:
+                return new BlockingWaitStrategy();
+        }
     }
 }
