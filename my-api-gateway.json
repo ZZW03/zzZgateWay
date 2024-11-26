@@ -1,0 +1,42 @@
+{
+  "rules": [
+    {
+      "ruleId": 123,
+      "ruleName": "test",
+      "serverName": "test-service-1",
+      "loadBalancing": 2,
+      "path": ["/api/v1/users", "/api/v1/products"],
+      "prefix": ["/api/v1", "/api/v2"],
+      "order": false,
+      "filters": [
+        {
+          "filterId": 3,
+          "filterName": "limit"
+        },
+        {
+          "filterId": 4,
+          "filterName": "authorize"
+        },
+        {
+          "filterId": 2,
+          "filterName": "round"
+        },
+        {
+          "filterId": 1,
+          "filterName": "route"
+        }
+      ],
+      "flowLimiting": {
+        "type": 1,
+        "Time": 5000,
+        "frequency": 10
+      },
+      "hystrixConfig":
+      {
+        "timeoutInMilliseconds":"1000",
+        "threadCoreSize":"2",
+        "fallbackResponse":"/test1"
+      }
+    }
+  ]
+}

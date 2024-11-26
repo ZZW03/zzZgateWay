@@ -21,6 +21,7 @@ public class GatewayResponse {
      * 额外的响应结果
      */
     private final HttpHeaders extraResponseHeaders = new DefaultHttpHeaders();
+
     /**
      * 响应内容
      */

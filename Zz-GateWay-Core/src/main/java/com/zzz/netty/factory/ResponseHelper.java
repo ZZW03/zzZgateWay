@@ -1,8 +1,6 @@
 package com.zzz.netty.factory;
 
-
 import com.zzz.constant.BasicConst;
-import com.zzz.constant.ResponseCode;
 import com.zzz.model.GatewayResponse;
 import com.zzz.model.IContext;
 import io.netty.buffer.ByteBuf;
@@ -13,11 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
-/**
-
- * 响应的辅助类
- */
 
 @Slf4j
 public class ResponseHelper {

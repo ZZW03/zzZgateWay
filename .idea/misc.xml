@@ -21,6 +21,7 @@
         <option value="$PROJECT_DIR$/Zz-Register/Zz-Register-Api/pom.xml" />
         <option value="$PROJECT_DIR$/Zz-Register/Zz-Register-Nacos/pom.xml" />
         <option value="$PROJECT_DIR$/Zz-Register/pom.xml" />
+        <option value="$PROJECT_DIR$/test/pom.xml" />
       </set>
     </option>
   </component>
