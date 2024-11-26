@@ -9,9 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class AsyncHttpHelper {
 
-    public void initialized(AsyncHttpClient asyncHttpClient) {
-        this.asyncHttpClient = asyncHttpClient;
-    }
+    AsyncHttpClient asyncHttpClient = null;
 
     private static class SingletonHolder {
         private static final AsyncHttpHelper INSTANCE = new AsyncHttpHelper();
@@ -21,9 +19,7 @@ public class AsyncHttpHelper {
         return SingletonHolder.INSTANCE;
     }
 
-    AsyncHttpClient asyncHttpClient = null;
-
-    public void init(AsyncHttpClient asyncHttpClient){
+    public void initialized(AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 

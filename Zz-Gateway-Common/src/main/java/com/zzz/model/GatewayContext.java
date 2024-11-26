@@ -27,7 +27,6 @@ public class GatewayContext extends BasicContext{
 
     private Timer.Sample timerSample;
 
-
     public GatewayContext(String protocol, ChannelHandlerContext nettyCtx, boolean keepAlive,
                           GatewayRequest request, Rule rule, int currentRetryTimes){
         super(protocol, nettyCtx, keepAlive);

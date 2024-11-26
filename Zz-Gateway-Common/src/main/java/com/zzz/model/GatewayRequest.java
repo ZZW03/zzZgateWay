@@ -252,7 +252,6 @@ public class GatewayRequest implements IGatewayRequest{
     }
 
 
-
     @Override
     public void setModifyHost(String modifyHost) {
         this.modifyHost = modifyHost;
@@ -321,29 +320,4 @@ public class GatewayRequest implements IGatewayRequest{
 
 
 
-    @Override
-    public String toString() {
-        return "GatewayRequest{" +
-                "uniqueId='" + uniqueId + '\'' +
-                ", beginTime=" + beginTime +
-                ", charset=" + charset +
-                ", clientIp='" + clientIp + '\'' +
-                ", host='" + host + '\'' +
-                ", path='" + path + '\'' +
-                ", uri='" + uri + '\'' +
-                ", method=" + method +
-                ", contentType='" + contentType + '\'' +
-                ", headers=" + headers +
-                ", queryStringDecoder=" + queryStringDecoder +
-                ", fullHttpRequest=" + fullHttpRequest +
-                ", body='" + body + '\'' +
-                ", userId=" + userId +
-                ", cookieMap=" + cookieMap +
-                ", postParameters=" + postParameters +
-                ", modifyScheme='" + modifyScheme + '\'' +
-                ", modifyHost='" + modifyHost + '\'' +
-                ", modifyPath='" + modifyPath + '\'' +
-                ", requestBuilder=" + requestBuilder +
-                '}';
-    }
 }

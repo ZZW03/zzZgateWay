@@ -180,7 +180,7 @@ public class BasicContext implements IContext{
 
     @Override
     public void invokeCompletedCallBack() {
-        if(completedCallbacks == null){
+        if(completedCallbacks != null){
             completedCallbacks.forEach(call->call.accept(this));
         }
     }

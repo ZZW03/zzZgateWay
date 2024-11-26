@@ -65,6 +65,7 @@ public class RequestFactory {
         String clientIp = getClientIp(ctx, fullHttpRequest);
         String contentType = HttpUtil.getMimeType(fullHttpRequest) == null ? null :
                 HttpUtil.getMimeType(fullHttpRequest).toString();
+
         Charset charset = HttpUtil.getCharset(fullHttpRequest, StandardCharsets.UTF_8);
 
         GatewayRequest gatewayRequest = new GatewayRequest(uniqueId, charset, clientIp, host, uri, method,
@@ -92,6 +93,7 @@ public class RequestFactory {
             InetSocketAddress inetSocketAddress = (InetSocketAddress) ctx.channel().remoteAddress();
             clientIp = inetSocketAddress.getAddress().getHostAddress();
         }
+
         return clientIp;
     }
 

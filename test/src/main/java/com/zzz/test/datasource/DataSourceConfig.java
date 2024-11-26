@@ -50,9 +50,9 @@ public class DataSourceConfig {
     private DataSource dataSource2() {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://rm-bp11b96h387z330h8.mysql.rds.aliyuncs.com:3306/vbp?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true");
-        dataSource.setUsername("haoyaouser");
-        dataSource.setPassword("QhgfO_LJf2LsM5F4A_7NmWb123");
+        dataSource.setJdbcUrl("jdbc:mysql://172.16.200.53:31522/stat_mt?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true");
+        dataSource.setUsername("root");
+        dataSource.setPassword("123456");
         if(isConnect(dataSource)){
             return dataSource;
         }

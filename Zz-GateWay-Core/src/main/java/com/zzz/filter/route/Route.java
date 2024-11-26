@@ -121,7 +121,6 @@ public class Route implements Filter {
                     log.info("请求超时");
                     ctx.setResponse(GatewayResponse.buildGatewayResponse(ResponseCode.GATEWAY_FALLBACK));
                     ResponseHelper.writeResponse(ctx);
-
                 }else{
                     log.info("重新路由");
                     //根据规则在重新路由

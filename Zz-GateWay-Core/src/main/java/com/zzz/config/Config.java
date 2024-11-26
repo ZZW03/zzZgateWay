@@ -2,6 +2,10 @@ package com.zzz.config;
 
 import com.lmax.disruptor.*;
 
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * 本地服务的配置
  */
@@ -98,7 +102,9 @@ public class Config {
      Integer processThread = Runtime.getRuntime().availableProcessors();
 
      String waitStrategy ="blocking";
+    // ********************************************密钥**************************************************//
 
+    private KeyPair keyPair;
 
     // ********************************************基础方法**************************************************//
 
@@ -281,5 +287,20 @@ public class Config {
             default:
                 return new BlockingWaitStrategy();
         }
+    }
+
+    public Config() {
+        KeyPairGenerator keyPairGenerator;
+        try {
+            keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            keyPairGenerator.initialize(2048);
+            keyPair = keyPairGenerator.generateKeyPair();
+        }catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Failed to initialize RSA key pair", e);
+        }
+    }
+
+    public KeyPair getKeyPair() {
+        return keyPair;
     }
 }

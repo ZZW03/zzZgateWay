@@ -64,26 +64,6 @@ public class GatewayResponse {
         return response;
     }
 
-    /**
-     * 处理返回json对象，失败时调用
-     *
-     * @param code
-     * @param args
-     * @return
-     */
-    public static GatewayResponse buildGatewayResponse(ResponseCode code, Object... args) {
-        ObjectNode objectNode = JSONUtil.createObjectNode();
-        objectNode.put(JSONUtil.STATUS, code.getStatus().code());
-        objectNode.put(JSONUtil.CODE, code.getCode());
-        objectNode.put(JSONUtil.MESSAGE, code.getMessage());
-
-        GatewayResponse response = new GatewayResponse();
-        response.setHttpResponseStatus(code.getStatus());
-        response.putHeader(HttpHeaderNames.CONTENT_TYPE, HttpHeaderValues.APPLICATION_JSON + ";charset=utf-8");
-        response.setContent(JSONUtil.toJSONString(objectNode));
-
-        return response;
-    }
 
     /**
      * 处理返回json对象，成功时调用

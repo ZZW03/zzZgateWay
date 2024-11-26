@@ -51,7 +51,6 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
                 log.error("{} is null", filterId);
             }
         });
-
         return gatewayFilterChain;
     }
 
