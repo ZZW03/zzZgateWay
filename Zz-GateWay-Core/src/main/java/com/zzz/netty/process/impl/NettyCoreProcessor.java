@@ -2,6 +2,7 @@ package com.zzz.netty.process.impl;
 
 import com.zzz.config.Config;
 import com.zzz.filter.GatewayFilterChainChainFactory;
+import com.zzz.filter.encryption.KeyPairHelper;
 import com.zzz.model.GatewayContext;
 import com.zzz.model.HttpRequestWrapper;
 import com.zzz.netty.factory.RequestFactory;
@@ -26,14 +27,14 @@ public class NettyCoreProcessor implements NettyProcessor {
         try{
             log.info("进行处理");
             if (request.uri().equals("/public-key")){
-                Config config = new Config();
-                String s = Base64.getEncoder().encodeToString(config.getKeyPair().getPublic().getEncoded());
+                String s = Base64.getEncoder().encodeToString(KeyPairHelper.getInstance().getKeyPair().getPublic().getEncoded());
                 FullHttpResponse httpResponse = ResponseHelper.getHttpResponse(s);
                 ctx.writeAndFlush(httpResponse);
                 return;
             } else if (request.uri().equals("/favicon.ico")) {
                 return;
             }
+
             GatewayContext gatewayContext = RequestFactory.doContext(request, ctx);
             GatewayFilterChainChainFactory.getInstance().buildFilterChain(gatewayContext).doFilter(gatewayContext);
 

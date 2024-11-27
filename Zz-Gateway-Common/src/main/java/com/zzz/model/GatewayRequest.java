@@ -62,8 +62,7 @@ public class GatewayRequest implements IGatewayRequest{
      * URI：统一资源标识符，/XXX/XXX/XXX?attr1=value&attr2=value2
      * URL：统一资源定位符，它只是URI的子集一个实现
      */
-    @Getter
-    private final String uri;
+    private String uri;
 
     /**
      * 请求方法 post/put/GET
@@ -159,6 +158,15 @@ public class GatewayRequest implements IGatewayRequest{
             this.requestBuilder.setBody(contentBuffer.nioBuffer());
         }
     }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri){
+        this.uri = uri;
+    }
+
 
     /**
      * 获取请求体

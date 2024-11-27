@@ -3,6 +3,7 @@ package com.zzz.filter;
 import com.alibaba.nacos.api.utils.StringUtils;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.zzz.filter.encryption.EncryptFilter;
 import com.zzz.model.GatewayContext;
 import com.zzz.model.Rule;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,7 @@ public class GatewayFilterChainChainFactory implements FilterChainFactory {
 
     private GatewayFilterChain doBuildFilterChain(Rule rule) {
         GatewayFilterChain gatewayFilterChain = new GatewayFilterChain();
+        gatewayFilterChain.addFilter(new EncryptFilter());
         rule.getFilters().forEach(filter->{
             Long filterId = filter.getFilterId();
             if (filter != null){

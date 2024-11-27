@@ -40,7 +40,7 @@ public class AuthorizeFilter implements Filter {
         return JWT.create()
                 .withSubject("user123")
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 1000)) // 10 hours
                 .sign(algorithm);
     }
 

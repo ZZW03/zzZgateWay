@@ -104,7 +104,7 @@ public class Config {
      String waitStrategy ="blocking";
     // ********************************************密钥**************************************************//
 
-    private KeyPair keyPair;
+
 
     // ********************************************基础方法**************************************************//
 
@@ -289,18 +289,18 @@ public class Config {
         }
     }
 
-    public Config() {
-        KeyPairGenerator keyPairGenerator;
-        try {
-            keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        }catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Failed to initialize RSA key pair", e);
-        }
-    }
-
-    public KeyPair getKeyPair() {
-        return keyPair;
-    }
+//    public Config() {
+//        KeyPairGenerator keyPairGenerator;
+//        try {
+//            keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+//            keyPairGenerator.initialize(2048);
+//            keyPair = keyPairGenerator.generateKeyPair();
+//        }catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException("Failed to initialize RSA key pair", e);
+//        }
+//    }
+//
+//    public KeyPair getKeyPair() {
+//        return keyPair;
+//    }
 }
